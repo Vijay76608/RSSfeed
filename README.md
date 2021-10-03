@@ -32,4 +32,5 @@ The App is built using React Native, Typescript, Expo and Jest for unit testing.
 - Starting the project - npm run start (It opens expo dashboard and we can run on various devices and emulators from it)  
 - Android Emulator - npm run android  
 - IOS Emulator - npm run ios  
+
 ```App can be run on physical device by scanning QR code on expo dashboard.```
