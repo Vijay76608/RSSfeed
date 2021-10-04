@@ -3,7 +3,22 @@
  */
 import React from 'react';
 import { StyleSheet, TouchableOpacity, View,TouchableHighlight } from 'react-native';
-import { Text } from './Themed';
+// import { Text } from './Themed';
+
+import {
+  Box,
+  FlatList,
+  Heading,
+  Avatar,
+  HStack,
+  VStack,
+  Text,
+  Spacer,
+  Center,
+  NativeBaseProvider,
+  Pressable,
+} from "native-base"
+
 
 export default function ListItem(item:any) {
     const navigateToModal = () => {
@@ -13,7 +28,7 @@ export default function ListItem(item:any) {
      
   return (
     <View>
-      <View style={styles.helpContainer}>
+      {/* <View style={styles.helpContainer}>
         <TouchableOpacity 
                 onPress={()=>navigateToModal()}
                 onLongPress={()=>item.onPress(item)}
@@ -31,7 +46,47 @@ export default function ListItem(item:any) {
           darkColor="rgba(255,255,255,0.8)">
           Posted Date:{item.published.substr(0, 17)}
         </Text>
-      </View>
+      </View> */}
+      <Pressable onLongPress={()=>item.onPress(item)}
+        onPress={()=>navigateToModal()}
+        >
+      <HStack space={3} justifyContent="space-between">
+              <Avatar
+                size="48px"
+                
+              >{item.title.substr(0,2)}</Avatar>
+              <VStack>
+                <Text
+                  _dark={{
+                    color: "warmGray.50",
+                  }}
+                  color="coolGray.800"
+                  bold
+                >
+                  {item.title.substr(0,23)}
+                </Text>
+                <Text
+                  color="coolGray.600"
+                  _dark={{
+                    color: "warmGray.200",
+                  }}
+                >
+                  {item.title.substr(0,10)}
+                </Text>
+              </VStack>
+              <Spacer />
+              <Text
+                fontSize="xs"
+                _dark={{
+                  color: "warmGray.50",
+                }}
+                color="coolGray.800"
+                alignSelf="flex-start"
+              >
+                {item.published.substr(0, 17)}
+              </Text>
+            </HStack>
+            </Pressable>
     </View>
   );
 }

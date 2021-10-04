@@ -51,8 +51,9 @@ const BottomTab = createBottomTabNavigator<RootTabParamList>();
 function BottomTabNavigator() {
   //first tab state vars
   const [rssData, setRssData] = useState<any>([]);
-  const [feedUrl,setFeedUr ] = useState("");
-  const [tabUpdated,setTabUpdated ] = useState(false);
+  const [feedUrl,setFeedUr] = useState("");
+  const [tabUpdated,setTabUpdated] = useState(false);
+  const [isLoading,setIsLoading] = useState(false);
 
   const mounted = React.useMemo(() => ({ current: true }), []);
 
@@ -63,6 +64,8 @@ function BottomTabNavigator() {
 
   //getting user input url from tab one textInput
   const getInputUrl = function getInputUrl(url:string){
+    //for showing spinner
+    setIsLoading(true);
     setFeedUr(url);
   }
 
@@ -94,11 +97,14 @@ function BottomTabNavigator() {
           element.description="";
            return element;
        });
+        notifyMessage("Successfully fetched data","success");
+        setIsLoading(false);
         setRssData([...refinedData]);
       })
       .catch(e=>{
         console.log(e)
-        notifyMessage("Failed to load Rss Feed. Please check URL");})
+        notifyMessage("Failed to load Rss Feed. Please check URL","error");
+      })
     }
     if(feedUrl != ""){
       fetchFeed();
@@ -108,13 +114,13 @@ function BottomTabNavigator() {
     //storing user entered memory limit of device
     const getInputStorageLimit = function getInputStorageLimit(storageLimit:string){
       localStorage.storeKeyVal('storageLimit',storageLimit);
-      Alert.alert("Updated storage Settings");
+      notifyMessage("Updated storage Settings","info");
       setStorageLimit(storageLimit);
     }
 
   const colorScheme = useColorScheme();
 
-  const TabOneScreencomp = (props:any) => (<TabOneScreen {...props} rssData={rssData} setTabUpdated={setTabUpdated} getInputUrl={getInputUrl}/>)
+  const TabOneScreencomp = (props:any) => (<TabOneScreen {...props} rssData={rssData} isLoading={isLoading} setTabUpdated={setTabUpdated} getInputUrl={getInputUrl}/>)
   const TabTwoScreencomp = (props:any) => (<TabTwoScreen {...props} localFeed={localFeed} getInputStorageLimit={getInputStorageLimit}/>)
 
   
@@ -132,20 +138,20 @@ function BottomTabNavigator() {
           // options={({ navigation,getChildProps}:any) => ({
           title: 'Live Feed',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => (
-            <Pressable
-              onPress={() => navigation.navigate('Modal')}
-              style={({ pressed }) => ({
-                opacity: pressed ? 0.5 : 1,
-              })}>
-              <FontAwesome
-                name="info-circle"
-                size={25}
-                color={Colors[colorScheme].text}
-                style={{ marginRight: 15 }}
-              />
-            </Pressable>
-          ),
+          // headerRight: () => (
+          //   <Pressable
+          //     onPress={() => navigation.navigate('Modal')}
+          //     style={({ pressed }) => ({
+          //       opacity: pressed ? 0.5 : 1,
+          //     })}>
+          //     <FontAwesome
+          //       name="info-circle"
+          //       size={25}
+          //       color={Colors[colorScheme].text}
+          //       style={{ marginRight: 15 }}
+          //     />
+          //   </Pressable>
+          // ),
         })}
       />
       <BottomTab.Screen

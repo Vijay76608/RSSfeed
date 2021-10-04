@@ -5,6 +5,7 @@ import { Platform, StyleSheet } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Colors from '../constants/Colors';
 import { Text, View } from '../components/Themed';
+import { Image, Center } from "native-base";
 
 export default function ModalScreen(route:any) {
   let modalData:any;
@@ -14,6 +15,7 @@ export default function ModalScreen(route:any) {
   }
   return (
     <View style={styles.container}>
+      <Image source={{uri: "https://wallpaperaccess.com/full/317501.jpg",}} alt="Alternate Text" size="2xl"/>
       <Text style={styles.title}>{modalData&&modalData.title}</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
       <View style={styles.helpContainer}>

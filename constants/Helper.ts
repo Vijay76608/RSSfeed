@@ -7,15 +7,24 @@ import {
     Platform,
     Alert,
   } from 'react-native';
+import {Toast} from "native-base"
 import * as localStorage from "../constants/Storage";
 
 //toast or alert based on platform
-export const notifyMessage = (msg: string) => {
-    if (Platform.OS === 'android') {
-      ToastAndroid.show(msg, ToastAndroid.SHORT)
-    } else {
-      Alert.alert(msg);
-  }
+export const notifyMessage = (msg: string,status:any) => {
+  Toast.show({
+    title: msg,
+    placement: "top",
+    status:status
+  })
+  //   if (Platform.OS === 'android') {
+  //     Toast.show({
+  //       title: "Hello world",
+  //     })
+  //     ToastAndroid.show(msg, ToastAndroid.SHORT)
+  //   } else {
+  //     Alert.alert(msg);
+  // }
 }
 
 //Boolean to check storage limitation
