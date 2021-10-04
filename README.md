@@ -12,7 +12,9 @@ The App is built using React Native, Typescript, Expo and Jest for unit testing.
 - Each Feed item can be saved to device by long pressing any item from list.
 - Entering new URL refreshes the list and gets the new feed.
 - User can mention storage setting in second tab
-- User can only store the number of feeds on device that are mentioned in second tab.
+- User can only store the number of feeds on device that are mentioned in second tab.  
+
+##### ```Please consider switching to other branch named 'nativebaseui' for better UI developed using Native Base components```
 
 ### Quick description of folder structure:
 
@@ -33,4 +35,4 @@ The App is built using React Native, Typescript, Expo and Jest for unit testing.
 - Android Emulator - npm run android  
 - IOS Emulator - npm run ios  
 
-```App can be run on physical device by scanning QR code on expo dashboard.```
+```App can be run on physical device by scanning QR code on expo dashboard.  
